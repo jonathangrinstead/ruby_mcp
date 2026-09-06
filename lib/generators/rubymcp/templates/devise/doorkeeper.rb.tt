@@ -1,0 +1,25 @@
+Doorkeeper.configure do
+  orm :active_record
+  issuer <%= options[:issuer].delete_suffix('/').inspect %>
+
+  resource_owner_authenticator do
+    warden.authenticate!(scope: <%= Devise.mappings.values.find { |mapping| mapping.to.name == class_name }.name.inspect %>)
+  end
+
+  admin_authenticator do
+    head :forbidden
+  end
+
+  grant_flows ['authorization_code']
+  force_pkce
+  pkce_code_challenge_methods ['S256']
+  use_refresh_token
+  access_token_expires_in 1.hour
+  hash_token_secrets
+  default_scopes :mcp
+  enforce_configured_scopes
+
+  resource_indicator_validator lambda { |resources, _client|
+    resources == [<%= "#{options[:issuer].delete_suffix('/')}/mcp".inspect %>]
+  }
+end

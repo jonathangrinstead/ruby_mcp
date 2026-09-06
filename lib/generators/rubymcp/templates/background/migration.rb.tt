@@ -1,0 +1,19 @@
+class CreateRubymcpTasks < ActiveRecord::Migration[7.2]
+  def change
+    create_table :rubymcp_tasks, id: :string do |table|
+      table.string :owner, null: false
+      table.string :tool_class, null: false
+      table.string :status, null: false
+      table.text :arguments, null: false
+      table.text :context_data, null: false
+      table.text :result
+      table.float :progress
+      table.float :total
+      table.text :message
+      table.datetime :expires_at, null: false
+      table.timestamps
+    end
+    add_index :rubymcp_tasks, :owner
+    add_index :rubymcp_tasks, :expires_at
+  end
+end

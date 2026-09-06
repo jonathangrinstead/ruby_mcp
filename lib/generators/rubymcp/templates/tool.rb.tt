@@ -1,0 +1,9 @@
+class <%= class_name.delete_suffix('Tool') %>Tool < ApplicationTool
+  description 'Describe what this tool does'
+
+  param :message, type: :string, required: true
+
+  def call(message:)
+    { message: message }
+  end
+end

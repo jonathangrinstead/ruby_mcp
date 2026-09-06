@@ -1,0 +1,8 @@
+# Keep each client key stable to preserve its public client ID.
+# Use the exact callback URLs shown by your MCP client.
+# For an existing registration, add client_id with its current ID.
+# example_ai:
+#   name: Example AI
+#   redirect_uris:
+#     - https://client.example/oauth/callback
+{}

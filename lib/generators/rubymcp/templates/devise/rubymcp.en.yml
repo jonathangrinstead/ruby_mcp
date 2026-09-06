@@ -1,0 +1,4 @@
+en:
+  doorkeeper:
+    scopes:
+      mcp: Use tools with your account's permissions

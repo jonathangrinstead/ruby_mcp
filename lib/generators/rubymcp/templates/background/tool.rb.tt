@@ -1,0 +1,10 @@
+class <%= self.class_name.delete_suffix('Tool') %>Tool < ApplicationBackgroundTool
+  description 'Run background work; use rubymcp_task_status with the returned task_id for progress and results'
+
+  param :message, type: :string, required: true
+
+  def call(message:)
+    self.report_progress(1, total: 1, message: 'Finished')
+    { message: message }
+  end
+end

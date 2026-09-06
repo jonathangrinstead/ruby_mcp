@@ -1,0 +1,44 @@
+plugins:
+  - rubocop-airbnb
+  - rubocop-rails
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.2
+  Exclude:
+    - 'tmp/**/*'
+    - 'lib/generators/**/templates/**/*'
+
+Style/Documentation:
+  Enabled: false
+Style/RedundantSelf:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false
+Style/WordArray:
+  EnforcedStyle: brackets
+Style/SymbolArray:
+  EnforcedStyle: brackets
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
+Style/CollectionMethods:
+  Enabled: true
+  PreferredMethods:
+    map: collect
+    collect: collect
+    find: find
+    detect: find
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+Layout/LineLength:
+  Max: 150
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+Rails/ApplicationRecord:
+  Exclude:
+    - lib/rubymcp/background/task.rb
+Rails/ApplicationJob:
+  Exclude:
+    - lib/rubymcp/background/task_execute_job.rb
