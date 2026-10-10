@@ -100,8 +100,6 @@ Hidden tools are excluded from discovery and direct invocation. Keep record-leve
 
 This MVP focuses on synchronous tools and OAuth. It includes protocol and generated-app tests; the demo's Devise sign-in and tool flow has also been exercised with Claude through ngrok. Automatic OAuth client registration and streaming responses are not included.
 
-Earlier MVP versions also exposed background tasks, resources and prompts. These APIs have been removed; see the [upgrade notes](UPGRADING.md) before updating an existing installation.
-
 ## Contributing
 
 Issues and pull requests are welcome. To run the checks:

@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.summary = 'Rails-native tools built on the official MCP SDK'
   spec.license = 'MIT'
   spec.required_ruby_version = '>= 3.2'
-  spec.files = Dir['lib/**/*', 'README.md', 'UPGRADING.md', 'LICENSE']
+  spec.files = Dir['lib/**/*', 'README.md', 'LICENSE']
   spec.require_paths = ['lib']
 
   spec.add_dependency 'mcp', '~> 1.4.0'
