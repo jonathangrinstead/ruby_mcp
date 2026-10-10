@@ -35,10 +35,3 @@ Layout/LineLength:
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
-
-Rails/ApplicationRecord:
-  Exclude:
-    - lib/rubymcp/background/task.rb
-Rails/ApplicationJob:
-  Exclude:
-    - lib/rubymcp/background/task_execute_job.rb

@@ -9,10 +9,8 @@ module RubyMCP
     end
 
     config.to_prepare do
-      ['tools', 'prompts', 'resources', 'resource_templates'].each do |folder|
-        directory = Rails.root.join('app', folder)
-        Rails.autoloaders.main.eager_load_dir(directory) if directory.directory?
-      end
+      directory = Rails.root.join('app/tools')
+      Rails.autoloaders.main.eager_load_dir(directory) if directory.directory?
     end
   end
 end

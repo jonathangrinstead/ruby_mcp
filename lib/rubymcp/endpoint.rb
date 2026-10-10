@@ -31,9 +31,7 @@ module RubyMCP
         version: configuration.version,
         instructions: configuration.instructions,
         tools: Tool.available(context: context),
-        prompts: Prompt.available(context: context),
-        resources: Resource.available(context: context),
-        resource_templates: ResourceTemplate.available(context: context),
+        capabilities: { tools: {} },
         server_context: context,
         configuration: MCP::Configuration.new(
           validate_tool_call_results: true,

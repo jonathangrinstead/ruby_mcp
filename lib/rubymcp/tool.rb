@@ -2,7 +2,9 @@
 
 module RubyMCP
   class Tool < MCP::Tool
-    include Component
+    extend ActiveSupport::DescendantsTracker
+
+    attr_reader :context
 
     class Error < StandardError; end
 
@@ -15,6 +17,22 @@ module RubyMCP
       if self.annotations
         subclass.annotations(self.annotations.to_h.transform_keys { |key| key.to_s.underscore.to_sym })
       end
+    end
+
+    def self.abstract!
+      @abstract = true
+    end
+
+    def self.abstract?
+      @abstract == true
+    end
+
+    def self.visible?(context:)
+      true
+    end
+
+    def self.available(context:)
+      self.descendants.select { |tool| tool.name && !tool.abstract? && tool.visible?(context: context) }.sort_by(&:name_value)
     end
 
     def self.name_value
@@ -49,5 +67,12 @@ module RubyMCP
       end
     end
 
+    def initialize(context: {})
+      @context = context
+    end
+
+    def current_account
+      self.context.fetch(:current_account)
+    end
   end
 end
