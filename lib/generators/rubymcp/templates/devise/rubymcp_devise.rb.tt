@@ -1,6 +1,6 @@
 require 'rubymcp/devise_authentication'
 
 RubyMCP.configure do |config|
-  config.context = RubyMCP::DeviseAuthentication.new(model: <%= class_name.inspect %>, issuer: <%= options[:issuer].inspect %>)
-  config.allowed_hosts |= [URI.parse(<%= options[:issuer].inspect %>).hostname]
+  config.context = RubyMCP::DeviseAuthentication.new(model: <%= self.class_name.inspect %>, issuer: <%= self.options[:issuer].inspect %>)
+  config.allowed_hosts |= [URI.parse(<%= self.options[:issuer].inspect %>).hostname]
 end

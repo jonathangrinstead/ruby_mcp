@@ -54,6 +54,18 @@ RSpec.describe 'MCP endpoint', type: :request do
     expect(response.parsed_body).to eq('error' => 'Unauthorised')
   end
 
+  it 'rejects false authentication and fails loudly for an invalid context callback' do
+    RubyMCP.configuration.context = ->(_request) { false }
+    post '/mcp', params: { jsonrpc: '2.0', id: 1, method: 'tools/list' }, headers: @headers, as: :json
+    expect(response).to have_http_status(:unauthorized)
+    expect(response.parsed_body).to eq('error' => 'Unauthorised')
+
+    RubyMCP.configuration.context = ->(_request) { 'invalid context' }
+    expect {
+      post '/mcp', params: { jsonrpc: '2.0', id: 2, method: 'tools/list' }, headers: @headers, as: :json
+    }.to raise_error(ArgumentError, 'RubyMCP context must return a Hash or nil')
+  end
+
   it 'returns expected tool errors and hides unexpected exception details' do
     post '/mcp', params: {
       jsonrpc: '2.0', id: 6, method: 'tools/call', params: { name: 'failure', arguments: { expected: true } }

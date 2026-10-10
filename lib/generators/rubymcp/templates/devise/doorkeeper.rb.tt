@@ -1,13 +1,13 @@
 Doorkeeper.configure do
   orm :active_record
-  issuer <%= options[:issuer].delete_suffix('/').inspect %>
+  issuer <%= self.options[:issuer].delete_suffix('/').inspect %>
 
   resource_owner_authenticator do
-    warden.authenticate!(scope: <%= Devise.mappings.values.find { |mapping| mapping.to.name == class_name }.name.inspect %>)
+    self.warden.authenticate!(scope: <%= Devise.mappings.values.find { |mapping| mapping.to.name == self.class_name }.name.inspect %>)
   end
 
   admin_authenticator do
-    head :forbidden
+    self.head :forbidden
   end
 
   grant_flows ['authorization_code']
@@ -20,6 +20,6 @@ Doorkeeper.configure do
   enforce_configured_scopes
 
   resource_indicator_validator lambda { |resources, _client|
-    resources == [<%= "#{options[:issuer].delete_suffix('/')}/mcp".inspect %>]
+    resources == [<%= "#{self.options[:issuer].delete_suffix('/')}/mcp".inspect %>]
   }
 end
