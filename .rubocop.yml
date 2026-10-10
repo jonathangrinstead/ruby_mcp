@@ -7,7 +7,6 @@ AllCops:
   TargetRubyVersion: 3.2
   Exclude:
     - 'tmp/**/*'
-    - 'lib/generators/**/templates/**/*'
 
 Style/Documentation:
   Enabled: false
@@ -16,10 +15,13 @@ Style/RedundantSelf:
 Style/GuardClause:
   Enabled: false
 Style/WordArray:
+  Enabled: true
   EnforcedStyle: brackets
 Style/SymbolArray:
+  Enabled: true
   EnforcedStyle: brackets
 Style/HashSyntax:
+  Enabled: true
   EnforcedShorthandSyntax: never
 Style/CollectionMethods:
   Enabled: true
@@ -29,9 +31,18 @@ Style/CollectionMethods:
     find: find
     detect: find
 Style/StringLiterals:
+  Enabled: true
   EnforcedStyle: single_quotes
 Layout/LineLength:
   Max: 150
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
+
+Layout/DotPosition:
+  Enabled: true
+  EnforcedStyle: leading
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: true
+Style/FrozenStringLiteralComment:
+  Enabled: false

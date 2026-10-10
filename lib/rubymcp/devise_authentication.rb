@@ -16,7 +16,7 @@ module RubyMCP
 
       @model_name = model
       @issuer = issuer.delete_suffix('/')
-      @resource = "#{@issuer}/mcp"
+      @resource = "#{self.issuer}/mcp"
     end
 
     def call(request)

@@ -2,8 +2,9 @@
 
 require 'tmpdir'
 require 'open3'
+require 'rubymcp/client_registry'
 
-RSpec.describe 'OAuth client configuration' do
+RSpec.describe RubyMCP::ClientRegistry do
   it 'preserves registrations and applies only valid configuration atomically' do
     Dir.mktmpdir('rubymcp-clients') do |directory|
       library = File.expand_path('../../lib', __dir__)
