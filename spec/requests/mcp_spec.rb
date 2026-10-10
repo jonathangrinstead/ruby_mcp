@@ -16,6 +16,7 @@ RSpec.describe 'MCP endpoint', type: :request do
     expect(response).to have_http_status(:ok)
     expect(response.parsed_body.dig('result', 'serverInfo', 'name')).to eq('rails_app')
     expect(response.headers['Mcp-Session-Id']).to be_nil
+    expect(response.parsed_body.dig('result', 'capabilities').keys).to eq(['tools'])
 
     post '/mcp', params: { jsonrpc: '2.0', id: 2, method: 'tools/list' }, headers: @headers, as: :json
     expect(response).to have_http_status(:ok)

@@ -2,9 +2,6 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'activejob', '~> 8.1.0', require: false
-gem 'sidekiq', '~> 8.0', require: false
-gem 'annotaterb', '~> 4.22', require: false
 gem 'activerecord', '~> 8.1.0', require: false
 gem 'devise', '~> 5.0', require: false
 gem 'doorkeeper', '= 6.0.0.beta2', require: false

@@ -2,7 +2,7 @@
 
 **Give AI assistants access to your Rails app.**
 
-Expose tools, resources and prompts with familiar Ruby classes. RubyMCP handles Rails integration and authentication setup; the official [MCP Ruby SDK](https://github.com/modelcontextprotocol/ruby-sdk) handles the protocol.
+Expose tools with familiar Ruby classes. RubyMCP handles Rails integration and authentication setup; the official [MCP Ruby SDK](https://github.com/modelcontextprotocol/ruby-sdk) handles the protocol.
 
 ## Show me the code
 
@@ -25,11 +25,8 @@ That's a tool. RubyMCP discovers it automatically, validates its arguments and t
 ## Features
 
 - **Tools:** expose your app's behaviour through ordinary Ruby methods.
-- **Resources:** share data through fixed URIs or record-specific templates.
-- **Prompts:** define reusable instructions with named arguments.
 - **Authentication:** generate a Devise + Doorkeeper sign-in and consent flow.
-- **Visibility:** control which tools, resources and prompts each account can access.
-- **Background work:** optional Sidekiq jobs with saved progress, results and cancellation through polling tools.
+- **Visibility:** control which tools each account can discover and call.
 - **Rails conventions:** generators, automatic discovery and development reloading.
 
 ## Get started
@@ -87,15 +84,9 @@ Restart Rails. Configure your client with `https://app.example.com/mcp` and the 
 
 Authentication identifies the account. Keep account-scoped queries and record-level permission checks in your tools. The MCP endpoint does not run your application's controller callbacks.
 
-## More than tools
+## Tool permissions
 
-```sh
-bin/rails generate rubymcp:resource portfolio
-bin/rails generate rubymcp:resource_template startup
-bin/rails generate rubymcp:prompt compare_startups
-```
-
-Restrict any component by defining its visibility hook:
+Restrict a tool by defining its visibility hook:
 
 ```ruby
 def self.visible?(context:)
@@ -103,13 +94,11 @@ def self.visible?(context:)
 end
 ```
 
-Hidden components are excluded from discovery and direct invocation through the endpoint.
-
-Background tools are optional and require Active Record, Active Job, Sidekiq and Redis. The [background generator](lib/generators/rubymcp/background_generator.rb) creates their configuration and database migration. Progress is retrieved through `rubymcp_task_status`; this MVP does not implement the experimental MCP Tasks extension.
+Hidden tools are excluded from discovery and direct invocation. Keep record-level checks inside each tool, using `current_account` to scope queries.
 
 ## Status
 
-The MVP includes protocol and generated-app tests. Live external-client and Redis-worker verification is still pending. Automatic OAuth client registration, streaming and resource subscriptions are not included yet. Fuller documentation will follow.
+This MVP focuses on synchronous tools and OAuth. It includes protocol and generated-app tests; the demo's Devise sign-in and tool flow has also been exercised with Claude through ngrok. Automatic OAuth client registration and streaming responses are not included.
 
 ## Contributing
 
